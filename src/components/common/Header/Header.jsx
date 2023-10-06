@@ -26,9 +26,9 @@ export default function Header() {
                 Contacts
               </NavLink>
             )}
-            <NavLink to="/about" className={css.userBtn}>
+            {/* <NavLink to="/about" className={css.userBtn}>
               About
-            </NavLink>
+            </NavLink> */}
           </div>
 
           {isLoggedIn ? (

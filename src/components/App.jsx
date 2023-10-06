@@ -6,7 +6,7 @@ import authOperations from 'store/auth.operations';
 import { Route, Routes } from 'react-router-dom';
 import PrivateRoute from './common/PrivateRoute/PrivateRoute';
 import Home from './pages/Home/Home';
-import About from './pages/About/About';
+// import About from './pages/About/About';
 import LogIn from './pages/LogIn/LogIn';
 import Registration from './pages/Registration/Registration';
 import NotFound from './pages/NotFound';
@@ -43,14 +43,14 @@ function App() {
               </PrivateRoute>
             }
           />
-          <Route
+          {/* <Route
             path="/about"
             element={
               <PrivateRoute redirectTo="/login">
                 <About />
               </PrivateRoute>
             }
-          />
+          /> */}
           <Route path="/login" element={<LogIn />} />
           <Route path="/registration" element={<Registration />} />
           <Route path="*" element={<NotFound />} />

@@ -35,7 +35,7 @@ function RegisterView() {
                 value={fields[key]}
                 name={key}
                 onChange={onInputChange}
-                type="text"
+                type={key}
               />
             </label>
           </div>
