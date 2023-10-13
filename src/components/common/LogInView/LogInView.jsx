@@ -23,18 +23,10 @@ function LogInView({ navigateTo = '/' }) {
 
   const onFormSubmit = async e => {
     e.preventDefault();
-    try {
-      await dispatch(authOperations.logIn(fields));
-      setFields(initFields);
-      navigation(navigateTo);
-    } catch (error) {
-      console.error('Login error:', error);
-    }
+    await dispatch(authOperations.logIn(fields));
+    setFields(initFields);
+    navigation(navigateTo);
   };
-
-  // useEffect(() => {
-  //   console.log('isLoggedIn changed:', isLoggedIn);
-  // }, [isLoggedIn]);
 
   return !isLoggedIn ? (
     <div>

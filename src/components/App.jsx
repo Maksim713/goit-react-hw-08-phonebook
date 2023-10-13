@@ -1,26 +1,36 @@
-import Contacts from './pages/Contacts/Contacts';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import Header from './common/Header';
+import Home from './pages/Home/Home';
+import Registration from './pages/Registration/Registration';
+// import NotFound from './pages/NotFound';
+import LogIn from './pages/LogIn/LogIn';
 import { useDispatch, useSelector } from 'react-redux';
-import authSelectors from 'store/auth.selectors';
 import { useEffect } from 'react';
 import authOperations from 'store/auth.operations';
-import { Route, Routes } from 'react-router-dom';
 import PrivateRoute from './common/PrivateRoute/PrivateRoute';
-import Home from './pages/Home/Home';
 // import About from './pages/About/About';
-import LogIn from './pages/LogIn/LogIn';
-import Registration from './pages/Registration/Registration';
-import NotFound from './pages/NotFound';
-import Header from './common/Header';
+import Contacts from './pages/Contacts/Contacts';
+import authSelectors from 'store/auth.selectors';
 
 function App() {
   const dispatch = useDispatch();
   const isFetchingCurrentUser = useSelector(
     authSelectors.getIsFetchingCurrentUser
   );
+  // console.log(isFetchingCurrentUser)
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(authOperations.fetchCurrentUser());
   }, [dispatch]);
+
+  if (
+    window.location.pathname === '/goit-react-hw-08-phonebook' &&
+    !isFetchingCurrentUser
+  ) {
+    navigate('/login');
+    return null;
+  }
 
   return (
     !isFetchingCurrentUser && (
@@ -53,7 +63,7 @@ function App() {
           /> */}
           <Route path="/login" element={<LogIn />} />
           <Route path="/registration" element={<Registration />} />
-          <Route path="*" element={<NotFound />} />
+          {/* <Route path="*" element={<NotFound />} /> */}
         </Routes>
       </>
     )

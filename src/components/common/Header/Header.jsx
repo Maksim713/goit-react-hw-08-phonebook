@@ -33,7 +33,7 @@ export default function Header() {
 
           {isLoggedIn ? (
             <div>
-              Welcome, {userEmail}{' '}
+              Welcome, {userEmail}
               <button className={css.userBtn} onClick={onClickLogOut}>
                 Logout
               </button>

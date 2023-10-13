@@ -1,7 +1,5 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { getAllContacts } from 'store/contacts.service';
-import { addContactItem } from 'store/contacts.service';
+import { useAddContactItemMutation } from 'store/contacts.service';
 import InputField from '../InputField';
 import css from './ContactForm.module.css';
 
@@ -9,25 +7,18 @@ const initialValue = { name: '', number: '' };
 
 function ContactForm() {
   const [value, setValue] = useState(initialValue);
-  const dispatch = useDispatch();
+  const [addContactItem] = useAddContactItemMutation();
 
   const handleInputChange = e =>
     setValue(p => ({ ...p, [e.target.name]: e.target.value }));
 
-  const handleFormSubmit = async e => {
+  const handleFormSubmit = e => {
     e.preventDefault();
-    await dispatch(addContactItem(value));
-    await dispatch(getAllContacts());
+    addContactItem(value);
     setValue(initialValue);
-    reset();
-  };
-
-  const reset = () => {
-    setValue({ name: '', number: '' });
   };
 
   const { name, number } = value;
-
   return (
     <form className={css.container} onSubmit={handleFormSubmit}>
       <InputField
