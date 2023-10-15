@@ -24,11 +24,16 @@ function App() {
     dispatch(authOperations.fetchCurrentUser());
   }, [dispatch]);
 
-  if (
-    window.location.pathname === '/goit-react-hw-08-phonebook' &&
-    !isFetchingCurrentUser
-  ) {
-    navigate('/login');
+  useEffect(() => {
+    if (
+      window.location.pathname === '/goit-react-hw-08-phonebook' &&
+      !isFetchingCurrentUser
+    ) {
+      navigate('/');
+    }
+  }, [isFetchingCurrentUser, navigate]);
+
+  if (isFetchingCurrentUser) {
     return null;
   }
 
