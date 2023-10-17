@@ -13,11 +13,7 @@ function ContactsList() {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
 
-  const {
-    data: contacts,
-    // error, isLoading
-    refetch,
-  } = useGetAllContactsQuery();
+  const { data: contacts, refetch } = useGetAllContactsQuery();
 
   useEffect(() => {
     if (isLoggedIn) refetch();

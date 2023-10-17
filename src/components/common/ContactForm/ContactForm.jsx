@@ -1,5 +1,8 @@
 import { useState } from 'react';
-import { useAddContactItemMutation } from 'store/contacts.service';
+import {
+  useAddContactItemMutation,
+  useGetAllContactsQuery,
+} from 'store/contacts.service';
 import InputField from '../InputField';
 import css from './ContactForm.module.css';
 
@@ -8,14 +11,18 @@ const initialValue = { name: '', number: '' };
 function ContactForm() {
   const [value, setValue] = useState(initialValue);
   const [addContactItem] = useAddContactItemMutation();
+  const { refetch } = useGetAllContactsQuery();
 
   const handleInputChange = e =>
     setValue(p => ({ ...p, [e.target.name]: e.target.value }));
 
-  const handleFormSubmit = e => {
+  const handleFormSubmit = async e => {
     e.preventDefault();
-    addContactItem(value);
-    setValue(initialValue);
+    const result = await addContactItem(value);
+    if (result.data) {
+      setValue(initialValue);
+      refetch();
+    }
   };
 
   const { name, number } = value;

@@ -26,7 +26,7 @@ function App() {
 
   useEffect(() => {
     if (
-      window.location.pathname === '/goit-react-hw-08-phonebook' &&
+      window.location.pathname === '/goit-react-hw-08-phonebook/' &&
       !isFetchingCurrentUser
     ) {
       navigate('/');

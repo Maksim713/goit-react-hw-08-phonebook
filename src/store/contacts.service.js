@@ -21,7 +21,7 @@ export const contactsApi = createApi({
     getAllContacts: builder.query({
       query: () => `contacts`,
       // providesTags: ['Contacts'],
-      providesTags: result =>
+      invalidatesTags: result =>
         result
           ? result.map(({ id }) => ({ type: 'Contacts', id }))
           : ['Contacts'],
